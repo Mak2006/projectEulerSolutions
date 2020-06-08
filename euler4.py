@@ -1,4 +1,4 @@
-#find the largest palindrome made out of the product of two n digit number
+# find the largest palindrome made out of the product of two n digit number
 
 # Problem cited 3 , and our challeng is to solve for any digits.
 
@@ -20,19 +20,23 @@
 #     check if can is palindrome
 #     save it
 # get the last#
-#,
+# ,
 
 
 def ispalindrome(num):
     snum = str(num)
     ispalin = False
-    if int(snum[0]) == int(snum[len(snum)-1]):
-        #remove the numbers
-        snum = snum[1: len(snum)-1]
-        return ispalindrome(snum)
+    if (len(snum) == 0):
+        return True
     else:
-        return False;
+        if int(snum[0]) == int(snum[len(snum) - 1]):
+            # remove the numbers
+            snum = snum[1: len(snum) - 1]
+            ispalin = ispalindrome(snum)
+        else:
+            ispalin = False;
 
+    return ispalin
 
 
 def find():
@@ -45,21 +49,15 @@ def find():
     return (pds[len(pds)])
 
 
-
-
 if __name__ == '__main__':
-    #get n
-    #n = int(input())
-    #find()
+    # get n
+    # n = int(input())
+    # find()
 
-    #Testing palindrome
-    ispalindrome(100);
-    ispalindrome(1001);
-    ispalindrome(00);
-    ispalindrome(10301);
-
-
-
-
-
-
+    # Testing palindrome
+    # print(ispalindrome(101));
+    # print(ispalindrome(10));
+    # print(ispalindrome(0));
+    # print(ispalindrome(10001));
+    # print(ispalindrome(151));
+    # print(ispalindrome(1013));
