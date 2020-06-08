@@ -1,11 +1,12 @@
 import pandas as pd
-import numpy as np
+#The prime factors of 13195 are 5, 7, 13 and 29.
+# What is the largest prime factor of the number 600851475143 ?
 
-def  factorize(target):
-    fac = pd.Series([2]) # these are the factors
+def factorize(target):
+    fac = pd.Series([2])  # these are the factors
 
-    #target = 600851475143
-    #target = 40 say
+    # target = 600851475143
+    # target = 40 say
 
     # Initial thinking
     # start = 2 # 2*m=t
@@ -40,32 +41,35 @@ def  factorize(target):
     # Implementation
     # these two number also search as our search space.
     fac = pd.Series([1, target])
-    #lf = largest factor available till now  = the answer for our question.
-    lf = fac[0] # we start with the first number
+    # lf = largest factor available till now  = the answer for our question.
+    lf = fac[0]  # we start with the first number
 
     while lf != target:
-        #divide target by lf # lf * t = target
-        quo = target//lf
-        rem = target%lf
+        # divide target by lf # lf * t = target
+        quo = target // lf
+        rem = target % lf
         if rem == 0:
-            if quo == target: # means lf = 1
+            if quo == target:  # means lf = 1
                 lf = lf + 1
             else:
-                #current lf is again a factor
-                #so remove target, append lf and t to factors
+                # current lf is again a factor
+                # so remove target, append lf and t to factors
                 leng = len(fac)
-                #fac = fac.drop(leng - 1)
+                # fac = fac.drop(leng - 1)
                 fac[leng - 1] = lf
                 fac[leng] = quo
-                #print(fac)
+                # print(fac)
                 target = quo
         else:
-            lf = lf + 1 # hope this is our next factor
-        print(lf)
+            lf = lf + 1  # hope this is our next factor
+        #print(lf)
     return fac
+
 
 if __name__ == '__main__':
     # 600851475143 is the given numeber and it sis quit ebig to be factorized without
     # improvisation,hence moving on to a more optimised method
-    s = factorize(851475143)
-    print(s);
+    factors = factorize(600851475143)
+    print(factors)
+
+    # Ok that works yeah !
