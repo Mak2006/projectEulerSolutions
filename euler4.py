@@ -22,7 +22,8 @@
 # get the last#
 # ,
 
-
+# Looks like it will take good time, have to find a numerical function.
+# well it ran sort of ok for 3 digits, this has room for optimization
 def ispalindrome(num):
     snum = str(num)
     ispalin = False
@@ -30,7 +31,6 @@ def ispalindrome(num):
         return True
     else:
         if int(snum[0]) == int(snum[len(snum) - 1]):
-            # remove the numbers
             snum = snum[1: len(snum) - 1]
             ispalin = ispalindrome(snum)
         else:
@@ -39,20 +39,32 @@ def ispalindrome(num):
     return ispalin
 
 
-def find():
-    pds = []
-    for i in range(100, 1000):
-        for j in range(100, 1000):
+# stiching the n
+def find(n):
+    pds = 0
+    r = 10 ** (n - 1)  # gives the lowest number of n digits
+    for i in range(r, r * 10):
+        for j in range(r, r * 10):
             num = i * j;
-            if (ispalindrome(num)):
-                pds.append(num)
-    return (pds[len(pds)])
+            if (pds < num):
+                # so we are now only checking greater numbers.
+                if (ispalindrome(num)):
+                    print("i {} j {} num{} ".format(i,j,num))
+                    # print(".", end='')  # a pointer so that we know the prog has not hanged
+                    # pds.append(num) # gues we don not need to retain the palindrome
+                    # in that way we do not need to sort as well.
+                    pds = num;  # retain the latest large number
+
+    return pds
 
 
 if __name__ == '__main__':
-    # get n
-    # n = int(input())
-    # find()
+    # get n where n is the numbre of digits.
+    print("We are after 2 numbers each of n digits which will give a palindrome")
+    print("Enter the number of digits n")
+    n = int(input())
+    palins = find(n);
+    print(palins)
 
     # Testing palindrome
     # print(ispalindrome(101));
