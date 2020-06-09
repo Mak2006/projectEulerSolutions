@@ -14,7 +14,7 @@ def check(fac, num):
 def getprime(n):
     fac = [2, 3, 5, 7] #we know these, the primes
     num = fac[len(fac) - 1]  # the last num we got
-    while len(fac) < n +1 : # untill so many primes are found
+    while len(fac) < n + 1 : # untill so many primes are found
         #get the next number k
         # if any of the numbers in fac divides k exclude k.
         # else add k to fac
