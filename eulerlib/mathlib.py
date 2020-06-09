@@ -126,6 +126,8 @@ def getprimes_lessthan(n):
 # speed = 2.500176429748535e-06 / prime for k 2000 numbers
 # speed = 7.669986963272094e-05 / prime for k 100000 numbers
 # speed = 0.0003510916748046875 / prime for k 500000 numbers
+# the output for 2000000 did not show the time, probably buffer was cleared, the oupt ut is stored as a file. it
+# was hopelessly slwo - another candidate to optimize - tooke around 25 mins to compute
 def getprimes_lessthan_array(n):
     sum = 5
     fac = [2, 3 ]  # we just put the frist prime.

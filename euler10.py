@@ -29,3 +29,4 @@ if __name__ == '__main__':
     print(primelist)
     print("sum is {}".format(sum))
     #print(primelist.sum())
+    #started at 21:07 9 Jube 2020
