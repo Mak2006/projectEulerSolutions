@@ -1,7 +1,13 @@
 import pandas as pd
 
-
 # This library uses pandas series to compute various elements
+global DEBUG
+
+
+def dprint(*args):
+    if (DEBUG):
+        print(args)
+
 
 # get fibonacci series below a certain limit.
 def getFibonaci(limit):
@@ -94,9 +100,10 @@ def getprime(n):
         num = num + 1  # the next number
         divides = check(fac, num)
         if not divides:
-            #print("found a prime " + str(num))
+            # print("found a prime " + str(num))
             fac[len(fac)] = num
     return fac
+
 
 # performance
 # 0.0006874 per prime for 2000
@@ -119,6 +126,7 @@ def getprimes_lessthan(n):
             fac[len(fac)] = num
     return fac
 
+
 # perform - much better using just [] rather than pandas
 # 3.998041152954101e-06 / prime for 2000 prime
 # 0.0002474347138404846 / prime for 200000
@@ -130,7 +138,7 @@ def getprimes_lessthan(n):
 # was hopelessly slwo - another candidate to optimize - tooke around 25 mins to compute
 def getprimes_lessthan_array(n):
     sum = 5
-    fac = [2, 3 ]  # we just put the frist prime.
+    fac = [2, 3]  # we just put the frist prime.
     if n <= 1:
         return fac
 
@@ -140,23 +148,43 @@ def getprimes_lessthan_array(n):
         # if any of the numbers in fac divides k exclude k.
         # else add k to fac
         # loop over
-        num = num + 2 # certainly next num is even so we can increment by 2
+        num = num + 2  # certainly next num is even so we can increment by 2
         divides = check(fac, num)
         if not divides:
-            #print("found a prime " + str(num))
+            # print("found a prime " + str(num))
             fac.append(num)
             sum = sum + num  # keep the sum as well
         # to see am alive
-        if(num %10000 == 1):
+        if (num % 10000 == 1):
             print(num)
     return fac, sum
+
 
 def check(fac, num):
     k = len(fac)
     for i in range(1, k):  # 1 becuase we dont need check with 2
-       # print("num {}, fac[i] {}".format(num, fac[i]))
+        # print("num {}, fac[i] {}".format(num, fac[i]))
         if num % fac[i] == 0:
             # this is a composite
             # print("am here")
-            return True # return on first occurance
+            return True  # return on first occurance
     return False  # if we have come thus far , it means none of the exisitn nums, in fac were able to divide the new number, henc it is a prime.
+
+
+# Method finds sequence of characters, numbers from input which is of interest.
+# inp_seq is the input sequence of strings or numbers in which we are interested.
+# length is the length of the chunk in which we are interested
+# comparator is the method we shall use to compare
+def findseq(inpseq, length, cmpmethod):
+    seq = []
+    while len(inpseq) >= length:
+        nextseq = inpseq[0:length]
+        dprint("next seq " + str(nextseq))
+        cres = cmpmethod(seq, nextseq)
+        if (not cres):
+            # we got a better seq
+            seq = nextseq
+        # reduce num
+        num = num[1:len(num)]
+
+    return seq
