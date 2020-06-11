@@ -174,17 +174,42 @@ def check(fac, num):
 # Method finds sequence of characters, numbers from input which is of interest.
 # inp_seq is the input sequence of strings or numbers in which we are interested.
 # length is the length of the chunk in which we are interested
-# comparator is the method we shall use to compare
-def findseq(inpseq, length, cmpmethod):
-    seq = []
+# compare_op is the method we shall use to compare
+# seq is a starting sequence to compare with
+def findseq(start_seq, inpseq, length, compare_op):
+    sequ = start_seq
+    dprint("findseq inp: ", inpseq)
     while len(inpseq) >= length:
         nextseq = inpseq[0:length]
-        dprint("next seq " + str(nextseq))
-        cres = cmpmethod(seq, nextseq)
+        dprint("findseq: seq and nextseq ", sequ, nextseq)
+        cres = compare(sequ, nextseq, compare_op)
         if (not cres):
             # we got a better seq
-            seq = nextseq
-        # reduce num
-        num = num[1:len(num)]
+            sequ = nextseq
+        # reduce inp_seq
+        inpseq = inpseq[1:len(inpseq)]
 
-    return seq
+    return sequ
+
+# the comparision using the compare opeation
+def compare(seq, nextseq, method):
+    # just get the mul of the numebrs within the sequence and compare
+    # 12313 , 33441 1+2+3+1+3 vs 3 + 3+4 +4 +1
+    # say True or False.
+    sa = method(seq)
+    sna = method(nextseq)
+    dprint("compare", sa, sna)
+    if (sa >= sna):
+        return True
+    else:
+        return False
+
+# definition of the compare operation
+def compare_op_mul(seq):
+    lenght = len(seq)
+    res = 1
+    for i in range(0, lenght):
+        dprint("compare_op_mul: ", seq[i], res)
+        res = res * seq[i]
+    return res
+
