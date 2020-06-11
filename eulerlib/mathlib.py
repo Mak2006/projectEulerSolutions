@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 # This library uses pandas series to compute various elements
 global DEBUG
@@ -269,3 +270,19 @@ def generate_n_trianglular_num_afterx(x, n):
     dprint(seq)
     print("last triagular number is " + str(s))
     return seq
+
+
+# generate collatz sequence
+def generate_collatz_seq(n):
+    # n → n / 2(n is even)
+    # n → 3n + 1(n is odd)
+    seq = [n]
+    while n > 1:
+        if(n % 2 == 0):
+            n = n/2
+        else:
+            n = 3*n + 1
+        seq.append(int(n))
+    length = len(seq)
+
+    return seq, length
