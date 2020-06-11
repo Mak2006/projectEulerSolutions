@@ -11,6 +11,7 @@
 import eulerlib.mathlib as ml
 import numpy as np
 
+
 def getSeq(data, length):
     seq = []
     row, column = data.shape
@@ -18,14 +19,14 @@ def getSeq(data, length):
     for r in range(0, row):
         ml.dprint("row check", data[r])
         seq = ml.findseq(seq, data[r], length, ml.compare_op_mul)
-        #ml.dprint("seq found row check", seq)
+        # ml.dprint("seq found row check", seq)
+
 
     for c in range(0, column):
-        ml.dprint("col check", data[:,c])
+        ml.dprint("col check", data[:, c])
         seq = ml.findseq(seq, data[:, c], length, ml.compare_op_mul)
 
-
-    #get the diagonals
+    # get the diagonals
     diagtd = np.diagonal(data)
     ml.dprint("diagtd", diagtd)
     diagbr = np.flipud(data).diagonal()
@@ -35,6 +36,15 @@ def getSeq(data, length):
     rows = len(diags)
     for d in range(0, rows):
         seq = ml.findseq(seq, diags[d], length, ml.compare_op_mul)
+
+    # Seems that this is not enough and we check all other diagonals as well.
+    diags2 = [data[::-1, :].diagonal(i) for i in range(-data.shape[0] + 1, data.shape[1])]
+    rows = len(diags2)
+    for d in range(0, rows):
+        seq = ml.findseq(seq, diags2[d], length, ml.compare_op_mul)
+
+    # This itself gave us the answer and we did not use the flipup
+    data2 = np.flipud(data) # not used and would be similar.
 
     return seq
 
@@ -92,27 +102,37 @@ if __name__ == '__main__':
 
     data = data.to_numpy()
     # print(data)
-   # array = np.arange(20)
+    # array = np.arange(20)
 
     data_test = np.array([
-        [2,   4,  5 , 60],
-        [2, 4,   50, 6],
-        [2,  40,  5,  6],
-        [10,  4,  5,  6],
+        [2, 4, 5, 60],
+        [2, 4, 50, 6],
+        [2, 40, 5, 6],
+        [10, 4, 5, 6],
     ])
 
-    data_test = np.array([
-        [2, 4, 51, 60, 200, 400, 500, 600],
-        [2, 4, 50, 6, 2, 4, 5, 6],
-        [2, 40, 5, 6, 2, 4, 5, 6],
-        [10, 4, 5, 6, 2, 4, 5, 6],
-        [10, 4, 5, 6, 2, 4, 5, 6],
-        [10, 4, 5, 6, 2, 4, 5, 6],
-        [10, 4, 5, 6, 2, 4, 5, 6],
-        [10, 4, 5, 6, 2, 4, 5, 0],
+    data_test2 = np.array([
+        [2, 4, 51, 60, 2, 4, 4, 5, 600],
+        [2, 4, 50, 6, 2, 1, 4, 5, 6],
+        [2, 40, 5, 6, 2, 4, 4, 5, 6],
+        [10, 4, 5, 6, 2, 4, 4, 5, 6],
+        [10, 4, 5, 6, 200, 4, 4, 5, 6],
+        [10, 4, 5, 6, 2, 4, 400, 5, 6],
+        [10, 4, 5, 6, 2, 4, 4, 500, 6],
+        [10, 4, 5, 6, 2, 4, 5, 4, 500],
+        [10, 4, 5, 6, 2, 4, 4, 5, 500]
     ])
 
-    seq = getSeq(data_test, 4)
+    data_test3 = np.array([
+        [9, 4, 3, 6, 1],
+        [2, 9, 9, 6, 5000],
+        [2, 4, 12, 6, 9],
+        [2, 4, 10, 9, 50],
+        [200, 4, 11, 6, 5]
+    ])
+
+
+    seq = getSeq(data, 4)
 
     ans = ml.compare_op_mul(seq)
     print("Seq is {} , and the result is {}".format(seq, ans))

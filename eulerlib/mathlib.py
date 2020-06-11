@@ -192,6 +192,7 @@ def findseq(start_seq, inpseq, length, compare_op):
     return sequ
 
 # the comparision using the compare opeation
+# as yet compare does not cache the calculation between invocation.
 def compare(seq, nextseq, method):
     # just get the mul of the numebrs within the sequence and compare
     # 12313 , 33441 1+2+3+1+3 vs 3 + 3+4 +4 +1
@@ -207,7 +208,7 @@ def compare(seq, nextseq, method):
 # definition of the compare operation
 def compare_op_mul(seq):
     lenght = len(seq)
-    res = 1
+    res = 1.0 # using float to compare as int is overflowing
     for i in range(0, lenght):
         dprint("compare_op_mul: ", seq[i], res)
         res = res * seq[i]
