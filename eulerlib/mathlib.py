@@ -9,6 +9,11 @@ def dprint(*args):
         print(args)
 
 
+def iamalive(i, processed):
+    if (i % processed == 0):
+        print("I am alive ", i)
+
+
 # get fibonacci series below a certain limit.
 def getFibonaci(limit):
     s = pd.Series([1, 2])  # has the first two
@@ -22,7 +27,7 @@ def getFibonaci(limit):
             s[length] = j
     return s
 
-
+# Gives the prime factors only.
 def factorize(target):
     # target = 600851475143
     # target = 40 say
@@ -83,6 +88,31 @@ def factorize(target):
             lf = lf + 1  # hope this is our next factor
         # print(lf)
     return fac
+
+# returns all the divisors of a  num
+def getdivisors(n):
+    first = 1
+    last = n
+    seq = [first, last]
+    firstindex = 1
+    while first < (last -1)/2:
+        #get the next num
+        first = first + 1
+        q , r = divmod(n, first)
+        #dprint("first {}, last {}".format(first, last))
+        if r == 0:
+            seq.insert(firstindex, first)
+            seq.insert(firstindex + 1, q)
+            #print(seq)
+            last = q
+            firstindex = firstindex + 1
+
+        # if(first > n + 100 ):
+        #     return seq
+
+    return seq
+
+
 
 
 # method returns n primes
@@ -191,6 +221,7 @@ def findseq(start_seq, inpseq, length, compare_op):
 
     return sequ
 
+
 # the comparision using the compare opeation
 # as yet compare does not cache the calculation between invocation.
 def compare(seq, nextseq, method):
@@ -205,12 +236,36 @@ def compare(seq, nextseq, method):
     else:
         return False
 
+
 # definition of the compare operation
 def compare_op_mul(seq):
     lenght = len(seq)
-    res = 1.0 # using float to compare as int is overflowing
+    res = 1.0  # using float to compare as int is overflowing
     for i in range(0, lenght):
         dprint("compare_op_mul: ", seq[i], res)
         res = res * seq[i]
     return res
 
+
+def generate_n_trianglular_num(n):
+    seq = []
+
+    for i in range(0, n):
+        s = (i + 1) * (i + 2) / 2  # as index is 0
+        seq.append(int(s))
+
+    dprint(seq)
+    return seq
+
+
+# start generating from x and include n more triagular numbers
+def generate_n_trianglular_num_afterx(x, n):
+    seq = []
+
+    for i in range(x, x + n):
+        s = (i + 1) * (i + 2) / 2  # as index is 0
+        seq.append(int(s))
+
+    dprint(seq)
+    print("last triagular number is " + str(s))
+    return seq
