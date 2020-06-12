@@ -90,7 +90,7 @@ def factorize(target):
         # print(lf)
     return fac
 
-# returns all the divisors of a  num
+# returns all the divisors of a  num, and proper divisors
 def getdivisors(n):
     first = 1
     last = n
@@ -110,8 +110,8 @@ def getdivisors(n):
 
         # if(first > n + 100 ):
         #     return seq
-
-    return seq
+    leng = len(seq)
+    return seq, seq[0:leng]
 
 
 
