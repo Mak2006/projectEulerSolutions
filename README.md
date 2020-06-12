@@ -1,7 +1,7 @@
 # projectEulerSolutions
 Solutions submitted for Project Euler
 
-![](https://projecteuler.net/profile/Mak2006.png)
+![](https://projecteuler.net/profile/Mak2006.png) 
 
 https://projecteuler.net/profile/Mak2006.png
 
