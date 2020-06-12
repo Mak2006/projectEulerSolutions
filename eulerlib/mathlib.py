@@ -111,7 +111,7 @@ def getdivisors(n):
         # if(first > n + 100 ):
         #     return seq
     leng = len(seq)
-    return seq, seq[0:leng]
+    return seq, seq[0:leng-1]
 
 
 
@@ -286,3 +286,23 @@ def generate_collatz_seq(n):
     length = len(seq)
 
     return seq, length
+
+
+#is this number amicable
+#returns false or
+#returns true, other amicale number
+
+def isamicable(n):
+
+    _, divs_of_n = getdivisors(n)
+
+    othernum = np.sum(divs_of_n)
+
+    _, divs_of_othernum = getdivisors(othernum)
+
+    num2 = np.sum(divs_of_othernum)
+    if(n == num2  & n != othernum ):
+        dprint("Ami pair found", n,  othernum)
+        return True, n, othernum
+    else:
+        return False, None, None
