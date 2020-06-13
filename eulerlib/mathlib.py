@@ -103,7 +103,8 @@ def getdivisors(n):
         #dprint("first {}, last {}".format(first, last))
         if r == 0:
             seq.insert(firstindex, first)
-            seq.insert(firstindex + 1, q)
+            if(first != q):
+                seq.insert(firstindex + 1, q)
             #print(seq)
             last = q
             firstindex = firstindex + 1
@@ -111,6 +112,7 @@ def getdivisors(n):
         # if(first > n + 100 ):
         #     return seq
     leng = len(seq)
+    # dprint(n, seq, seq[0:leng-1])
     return seq, seq[0:leng-1]
 
 
@@ -293,16 +295,15 @@ def generate_collatz_seq(n):
 #returns true, other amicale number
 
 def isamicable(n):
-
     _, divs_of_n = getdivisors(n)
 
-    othernum = np.sum(divs_of_n)
+    sum_div_n = np.sum(divs_of_n) #220
 
-    _, divs_of_othernum = getdivisors(othernum)
+    _, divs_of_othernum = getdivisors(sum_div_n)
 
-    num2 = np.sum(divs_of_othernum)
-    if(n == num2  & n != othernum ):
-        dprint("Ami pair found", n,  othernum)
-        return True, n, othernum
+    sum_div_other = np.sum(divs_of_othernum) #284
+    if(n == sum_div_other  & sum_div_other != sum_div_n ):
+        dprint("Ami pair found", n,  sum_div_n)
+        return True, n, sum_div_n
     else:
         return False, None, None
