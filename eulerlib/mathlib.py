@@ -17,7 +17,7 @@ def iamalive(i, processed):
 
 # get fibonacci series below a certain limit.
 def getFibonaci(limit):
-    s = pd.Series([1, 2])  # has the first two
+    s = pd.Series([1, 1])  # has the first two
     for i in range(limit):
         length = len(s)
         # print(length)
@@ -307,3 +307,51 @@ def isamicable(n):
         return True, n, sum_div_n
     else:
         return False, None, None
+
+
+# triangular number summation to find the math path
+def get_max_path(data):
+    rowmax = len(data)
+    colmax = len(data[rowmax - 1])
+    dprint("get_max_path", rowmax, colmax)
+
+    # [3]
+    # [7,4]
+    # [2,4,6]
+    # [8,5,9,3]
+
+    # crow = current row
+    for c_row in range(rowmax -2, -1, -1 ): # start from the last - 1 row
+
+        #for each number in this row, check the row below and the same index, index + 1, which is greater.
+        row = data[c_row]
+        rowbelow = data[c_row+1]
+        dprint("processing row, row below", row, rowbelow)
+        # iterate over the elements of thw row
+        rlen = len(row)
+        for c_col in range(0, rlen):
+            rowval = row[c_col]
+            dprint("item ", rowval)
+            leftchoice = rowval + rowbelow[c_col]
+            rightchoice = rowval + rowbelow[c_col + 1]
+            if(leftchoice >= rightchoice):
+                row[c_col] = leftchoice
+            else:
+                row[c_col] = rightchoice
+
+        # Now a row is done,
+        dprint(" row i {} and the val is", c_row, row)
+    return row[0]
+
+# Spiral mat is as in Euler 28 and as below.
+# dim is the dimension
+# 21 22 23 24 25
+# 20  7  8  9 10
+# 19  6  1  2 11
+# 18  5  4  3 12
+# 17 16 15 14 13
+# It was not required, this was done analytically
+def get_spiral_matrix(param):
+    import numpy as np
+    matrix = np.zeros((param, param))
+    pass

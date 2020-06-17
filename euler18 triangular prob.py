@@ -40,39 +40,6 @@ def getdata():
 
 
 
-#
-def get_max_path(data):
-    rowmax = len(data)
-    colmax = len(data[rowmax - 1])
-    ml.dprint("get_max_path", rowmax, colmax)
-
-    # [3]
-    # [7,4]
-    # [2,4,6]
-    # [8,5,9,3]
-
-    # crow = current row
-    for c_row in range(rowmax -2, -1, -1 ): # start from the last - 1 row
-
-        #for each number in this row, check the row below and the same index, index + 1, which is greater.
-        row = data[c_row]
-        rowbelow = data[c_row+1]
-        ml.dprint("processing row, row below", row, rowbelow)
-        # iterate over the elements of thw row
-        rlen = len(row)
-        for c_col in range(0, rlen):
-            rowval = row[c_col]
-            ml.dprint("item ", rowval)
-            leftchoice = rowval + rowbelow[c_col]
-            rightchoice = rowval + rowbelow[c_col + 1]
-            if(leftchoice >= rightchoice):
-                row[c_col] = leftchoice
-            else:
-                row[c_col] = rightchoice
-
-        # Now a row is done,
-        ml.dprint(" row i {} and the val is", c_row, row)
-    return row[0]
 
 if __name__ == '__main__':
 
@@ -83,5 +50,5 @@ if __name__ == '__main__':
 
     #ml.dprint(row, col, data[col -1], len(data[col - 1]), data[col - 1][1])
 
-    maxpath = get_max_path(data)
+    maxpath = ml.get_max_path(data)
     ml.dprint("Maximum path is ", maxpath)
